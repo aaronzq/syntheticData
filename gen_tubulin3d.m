@@ -4,13 +4,13 @@ function [traX,traY,traZ] = gen_tubulin3d(walkLength, dk_lat, dk_axi, k0_lat, k0
 W_lat = dk_lat.* randn(walkLength, 1);
 Wn_lat = zeros(walkLength, 1);
 for n = 1:walkLength
-    Wn_lat(n) = sum(W_lat(1:n), 'all');
+    Wn_lat(n) = sum(W_lat(1:n));
 end
 
 W_axi = dk_axi.* randn(walkLength, 1);
 Wn_axi = zeros(walkLength, 1);
 for n = 1:walkLength
-    Wn_axi(n) = sum(W_axi(1:n), 'all');
+    Wn_axi(n) = sum(W_axi(1:n));
 end
 
 kn_lat = exp(2*pi*1j* clip(k0_lat + Wn_lat, kmin_lat, kmax_lat));
