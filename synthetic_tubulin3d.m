@@ -14,7 +14,8 @@ dk_lat = 0.02/2.5;  % stiffness: higher, more flexible
 dk_axi = 0.01/2.5;
 v0 = 1;  % grow speed (um/step): higher, faster
 
-for nTry = 1:imgNum
+nTry = 1;
+while nTry  <= imgNum
     try
         trajectory = zeros(walkLength+1, 3, tubulinNum);
         % grow from x axis
@@ -101,9 +102,11 @@ for nTry = 1:imgNum
         saveName2 = sprintf('./tubulins3d_noise%d.tif', nTry);
         write3d(out, saveName);
         write3d(out_noise, saveName2);
-        disp(['Synthetic Tubulins Image ' num2str(nTry) ' ...done.']);   
+        
+        disp(['Synthetic Tubulins Image ' num2str(nTry) ' ...done.']);  
+        nTry = nTry + 1;
     catch
-        disp(['Synthetic Tubulins Image ' num2str(nTry) ' ...skipped.']);  
+%         disp(['Synthetic Tubulins Image ' num2str(nTry) ' ...skipped.']);  
     end
 end
 
