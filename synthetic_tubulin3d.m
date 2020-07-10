@@ -1,21 +1,20 @@
 close all;
 
-
-
-nTry = 11
-
-
+nTry = 12;
 
 gardenSize = [500, 500, 80]; % x, y and z, um
 cropSize = [300,300, 60];
 
-brightness = 240;
 
-walkLength = 600;  % step, growth time
-dk_lat = 0.02;  % stiffness: higher, more flexible
-dk_axi = 0.01;
-v0 = 3;  % grow speed (um/step): higher, faster
 tubulinNum = 60; % number of tubulins
+
+
+brightness = 60;
+walkLength = 1800;  % step, growth time
+dk_lat = 0.02/2.5;  % stiffness: higher, more flexible
+dk_axi = 0.01/2.5;
+v0 = 1;  % grow speed (um/step): higher, faster
+
 
 
 trajectory = zeros(walkLength+1, 3, tubulinNum);
@@ -85,11 +84,10 @@ for i = 1 : tubulinNum
                 (tZ > (gardenSize(3)-cropSize(3))/2 + 1) && (tZ < (gardenSize(3)+cropSize(3))/2 - 1) )
             iX = tX - (gardenSize(1)-cropSize(1))/2 ;
             iY = tY - (gardenSize(2)-cropSize(2))/2 ;
-            iZ = tZ - (gardenSize(3)-cropSize(3))/2 ;
-            img(floor(iY), floor(iX), round(iZ)) = img(floor(iY), floor(iX), round(iZ)) + 0.5 * brightness;
-            img(floor(iY), ceil(iX), round(iZ)) = img(floor(iY), ceil(iX), round(iZ)) + 0.5 * brightness;
-            img(ceil(iY), floor(iX), round(iZ)) = img(ceil(iY), floor(iX), round(iZ)) + 0.5 * brightness;
-            img(ceil(iY), ceil(iX), round(iZ)) = img(ceil(iY), ceil(iX), round(iZ)) + 0.5 * brightness;
+            iZ = tZ - (gardenSize(3)-cropSize(3))/2 ;            
+            img(floor(iY):ceil(iY), floor(iX):ceil(iX), floor(iZ):ceil(iZ)) = ...
+                img(floor(iY):ceil(iY), floor(iX):ceil(iX), floor(iZ):ceil(iZ)) + brightness;
+            
         end
     end
     
